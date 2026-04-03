@@ -1,0 +1,31 @@
+{
+    "version": 2,
+    "regions": ["hnd1"],
+    "builds": [
+        {
+            "src": "build_files.sh",
+            "use": "@vercel/static-build",
+            "config": {
+                "distDir": "staticfiles"
+            }
+        },
+        {
+            "src": "foodsaver/wsgi.py",
+            "use": "@vercel/python",
+            "config": {
+                "maxLambdaSize": "15mb",
+                "runtime": "python3.9"
+            }
+        }
+    ],
+    "routes": [
+        {
+            "src": "/static/(.*)",
+            "dest": "/$1"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "foodsaver/wsgi.py"
+        }
+    ]
+}
