@@ -1,4 +1,9 @@
 import os
+import django
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'your_project_name.settings')
+django.setup()
+
 from django.contrib.auth.models import User
 
 username = os.environ.get("DJANGO_SUPERUSER_USERNAME")
@@ -11,3 +16,5 @@ if username and email and password:
         print("Superuser created")
     else:
         print("Superuser already exists")
+else:
+    print("Missing environment variables")
